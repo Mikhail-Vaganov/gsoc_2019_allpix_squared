@@ -40,7 +40,7 @@ int main(int argc, char **args)
         tp.submit(move(task));
     }
 
-    while (!reporter.queue_is_empty() )
+    while (reporter.get_count()!=params.number_of_iteration )
         std::this_thread::yield();
 
     return 0;

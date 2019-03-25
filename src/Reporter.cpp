@@ -7,7 +7,7 @@
 namespace framework
 {
 
-Reporter::Reporter() : active(false), force_stop(false)
+Reporter::Reporter() : active(false), force_stop(false), count(0)
 {
 }
 
@@ -27,8 +27,11 @@ void Reporter::start()
         {
             auto fut = this->result_queue.wait_and_pop();
 
-            std::lock_guard<std::mutex> locker(cout_mutex);
-            std::cout << fut->get() << std::endl;
+            {
+                std::lock_guard<std::mutex> locker(cout_mutex);
+                std::cout << fut->get() << std::endl;
+            }
+            count++;
         }
 
         active = false;
@@ -50,6 +53,11 @@ bool Reporter::queue_is_empty()
 {
     std::lock_guard<std::mutex> locker(cout_mutex);
     return result_queue.empty();
+}
+
+int Reporter::get_count()
+{
+    return count;
 }
 
 }; // namespace framework
