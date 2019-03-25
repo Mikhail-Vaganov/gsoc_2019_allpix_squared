@@ -1,6 +1,7 @@
 # GSoC 2019 proposal for Allpix Squared
 This is a temporary repository for files necessary for preparation of my GSoC 2019 proposal for Allpix Squared.
 
+## First task
 Files and their content:
 - _task_one_report.pdf_ - my report on the first test task
 - _gsoc_task_one.conf_ - configuration of the test simulation
@@ -9,3 +10,11 @@ Files and their content:
 
 I have not uploaded the output file of ROOTObjectWriter, because it is rather big for keeping it in the git history. 
 Nevertheless, I can upload the file later if required.
+
+## Second task
+
+*Linux*
+
+From _src_ folder:
+
+$: g++ *.cpp -o framework -std=c++11 -pthreads
