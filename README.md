@@ -17,4 +17,4 @@ Nevertheless, I can upload the file later if required.
 
 From _src_ folder:
 
-$: g++ *.cpp -o framework -std=c++11 -pthreads
+:$ g++ *.cpp -o framework -std=c++11 -pthreads
