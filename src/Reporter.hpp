@@ -1,7 +1,6 @@
 #ifndef REPORTER_H
 #define REPORTER_H
 
-
 #include "ConcurrentQueue.hpp" 
 
 #include <future>
@@ -15,14 +14,14 @@ namespace framework
     {
         private:
             std::atomic<bool> active;
-            ConcurrentQueue<std::future<string>> result_queue;
+            ConcurrentQueue<std::future<std::string>> result_queue;
             std::atomic<bool> force_stop;
             std::mutex cout_mutex;
         public:
             Reporter();
             void start();
             void stop();
-            void push(std::future<string> future_message);
+            void push(std::future<std::string> future_message);
             ~Reporter();
             bool queue_is_empty();
     };

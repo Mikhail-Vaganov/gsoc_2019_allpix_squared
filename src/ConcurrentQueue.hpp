@@ -5,8 +5,6 @@
 #include <thread>
 #include <condition_variable>
 
-using namespace std;
-
 namespace framework
 {
 template <class T>

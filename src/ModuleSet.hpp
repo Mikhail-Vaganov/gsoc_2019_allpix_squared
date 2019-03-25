@@ -23,7 +23,7 @@ namespace framework
                 modules.push_back(std::make_shared<Propagation>());
             }
 
-            const vector<std::shared_ptr<Module>> get_modules()
+            const std::vector<std::shared_ptr<Module>> get_modules()
             {
                 return modules;
             }

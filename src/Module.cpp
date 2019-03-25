@@ -2,8 +2,8 @@
 #include <iostream>
 #include <thread>
 #include <string>
-
-using namespace std;
+#include <mutex>
+#include <string>
 
 namespace framework
 {
@@ -17,13 +17,13 @@ namespace framework
 
     Module::~Module() {}
 
-    string Module::run(int innerPrngSeed)
+    std::string Module::run(int innerPrngSeed)
     {
         int first_random_number;
         int second_random_number;
 
         {
-            lock_guard<mutex> locker(mt);
+            std::lock_guard<std::mutex> locker(mt);
             prng.seed(innerPrngSeed);
             first_random_number = prng();
             second_random_number = prng();

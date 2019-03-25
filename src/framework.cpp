@@ -25,7 +25,7 @@ int main(int argc, char **args)
     Reporter reporter;
     reporter.start();
 
-    mt19937_64 mt(params.main_prng_seed);
+    std::mt19937_64 mt(params.main_prng_seed);
     ModuleSet ms;
 
     ThreadPool tp(params.number_of_workers);
@@ -35,7 +35,7 @@ int main(int argc, char **args)
     for(int i=0; i<params.number_of_iteration; i++)
     {
         Event e(ms, mt());
-        std::packaged_task<string()> task(e);
+        std::packaged_task<std::string()> task(e);
         reporter.push(task.get_future());
         tp.submit(move(task));
     }

@@ -1,5 +1,3 @@
-
-
 #include "Reporter.hpp"
 
 #include <iostream>
@@ -43,7 +41,7 @@ void Reporter::stop()
     force_stop = true;
 }
 
-void Reporter::push(std::future<string> future_message)
+void Reporter::push(std::future<std::string> future_message)
 {
     result_queue.push(move(future_message));
 }

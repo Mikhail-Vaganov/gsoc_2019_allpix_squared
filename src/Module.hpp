@@ -2,22 +2,22 @@
 #define A2DD_H
 
 #include <random>
-
-using namespace std;
+#include <mutex>
+#include <string>
 
 namespace framework
 {
     class Module
     {
         protected:
-            mt19937_64 prng;
-            string name;
-            mutex mt;
+            std::mt19937_64 prng;
+            std::string name;
+            std::mutex mt;
         public:
             Module();
             Module(int innerPrngSeed);
             virtual ~Module();
-            virtual string run(int innerPrngSeed);
+            virtual std::string run(int innerPrngSeed);
     };
 };
 

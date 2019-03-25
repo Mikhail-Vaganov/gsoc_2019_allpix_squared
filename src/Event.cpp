@@ -1,4 +1,5 @@
 #include <random>
+#include <string>
 
 #include "Event.hpp"
 #include "Deposition.hpp"
@@ -6,9 +7,9 @@
 namespace framework
 {
 
-    string Event::operator()()
+    std::string Event::operator()()
     {
-        string result_of_event_simulation;
+        std::string result_of_event_simulation;
         for(int i=0; i<this->module_set.size(); i++) 
         {
             result_of_event_simulation += module_set[i]->run(main_seed);

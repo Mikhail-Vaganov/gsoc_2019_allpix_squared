@@ -18,7 +18,7 @@ namespace framework
 
         public:
 
-            string operator()();
+            std::string operator()();
             Event(ModuleSet& ms, int main_seed);
     };
 } // namespace framework
