@@ -7,39 +7,49 @@
 namespace framework
 {
 
-Reporter::Reporter() : active(false), force_stop(false), count(0), count_limit(-1)
+Reporter::Reporter() : active(false), done(false), count(0), count_limit(-1)
 {
 }
 
 Reporter::~Reporter()
 {
     stop();
+
+    for(int i=0; i < reporting_threads.size(); i++)
+    if(reporting_threads[i].joinable())
+        reporting_threads[0].join();
 }
 
 void Reporter::start()
 {
-    std::thread report_writer([this]() {
+    reporting_threads.push_back(std::thread([this]() {
         active = true;
 
-        while (1)
+        while (!done)
         {
-            auto fut = this->result_queue.wait_and_pop();
+            std::future<std::string> fut;
 
-            std::lock_guard<std::mutex> locker(cout_mutex);
-            std::cout << fut->get() << std::endl;
-            count++;
-            if (count == count_limit)
-                coun_reached_value.notify_all();
+            if (this->result_queue.try_pop(fut))
+            {
+                std::lock_guard<std::mutex> locker(cout_mutex);
+                std::cout << fut.get() << std::endl;
+                count++;
+                if (count == count_limit)
+                    coun_reached_value.notify_all();
+            }
+            else
+            {
+                std::this_thread::yield();
+            }
         }
 
         active = false;
-    });
-    report_writer.detach();
+    }));
 }
 
 void Reporter::stop()
 {
-    force_stop = true;
+    done = true;
 }
 
 void Reporter::push(std::future<std::string> future_message)

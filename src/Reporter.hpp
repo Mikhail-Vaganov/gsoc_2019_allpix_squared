@@ -2,11 +2,13 @@
 #define REPORTER_H
 
 #include "ConcurrentQueue.hpp" 
+#include "JoinThreads.hpp"
 
 #include <future>
 #include <string>
 #include <condition_variable>
 #include <mutex>
+#include <memory>
 
 namespace framework
 {
@@ -15,11 +17,13 @@ namespace framework
         private:
             std::atomic<bool> active;
             ConcurrentQueue<std::future<std::string>> result_queue;
-            std::atomic<bool> force_stop;
+            std::atomic<bool> done;
             std::mutex cout_mutex;
             std::atomic<int> count;
             std::atomic<int> count_limit;
             std::condition_variable coun_reached_value;
+            std::vector<std::thread> reporting_threads;
+
         public:
             Reporter();
             void start();
