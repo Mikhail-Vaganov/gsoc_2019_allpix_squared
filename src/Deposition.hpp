@@ -10,8 +10,6 @@ namespace framework
         public:
             Deposition(int innerPrngSeed);
             Deposition();
-            
-            
     };
 } // namespace framework
 #endif

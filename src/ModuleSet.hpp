@@ -4,6 +4,8 @@
 #include "Module.hpp"
 #include "Deposition.hpp"
 #include "Propagation.hpp"
+#include "Transfer.hpp"
+#include "Digitizer.hpp"
 
 #include <vector>
 #include <memory>
@@ -21,6 +23,8 @@ namespace framework
             {
                 modules.push_back(std::make_shared<Deposition>());
                 modules.push_back(std::make_shared<Propagation>());
+                modules.push_back(std::make_shared<Transfer>());
+                modules.push_back(std::make_shared<Digitizer>());
             }
 
             const std::vector<std::shared_ptr<Module>> get_modules()
