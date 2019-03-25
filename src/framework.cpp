@@ -40,8 +40,9 @@ int main(int argc, char **args)
         tp.submit(move(task));
     }
 
-    while (reporter.get_count()!=params.number_of_iteration )
-        std::this_thread::yield();
+    reporter.wait_for_count_reached_value(params.number_of_iteration);
+    //while (reporter.get_count()!=params.number_of_iteration )
+      //  std::this_thread::yield();
 
     return 0;
 }

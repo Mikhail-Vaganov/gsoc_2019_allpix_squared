@@ -18,6 +18,8 @@ namespace framework
             std::atomic<bool> force_stop;
             std::mutex cout_mutex;
             std::atomic<int> count;
+            std::atomic<int> count_limit;
+            std::condition_variable coun_reached_value;
         public:
             Reporter();
             void start();
@@ -26,6 +28,7 @@ namespace framework
             ~Reporter();
             bool queue_is_empty();
             int get_count();
+            void wait_for_count_reached_value(int value);
     };
 }
 #endif

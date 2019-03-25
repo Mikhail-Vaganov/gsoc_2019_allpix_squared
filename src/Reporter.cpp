@@ -7,7 +7,7 @@
 namespace framework
 {
 
-Reporter::Reporter() : active(false), force_stop(false), count(0)
+Reporter::Reporter() : active(false), force_stop(false), count(0), count_limit(-1)
 {
 }
 
@@ -18,8 +18,6 @@ Reporter::~Reporter()
 
 void Reporter::start()
 {
-    //auto h = result_queue.empty();
-
     std::thread report_writer([this]() {
         active = true;
 
@@ -27,11 +25,11 @@ void Reporter::start()
         {
             auto fut = this->result_queue.wait_and_pop();
 
-            {
-                std::lock_guard<std::mutex> locker(cout_mutex);
-                std::cout << fut->get() << std::endl;
-            }
+            std::lock_guard<std::mutex> locker(cout_mutex);
+            std::cout << fut->get() << std::endl;
             count++;
+            if (count == count_limit)
+                coun_reached_value.notify_all();
         }
 
         active = false;
@@ -58,6 +56,20 @@ bool Reporter::queue_is_empty()
 int Reporter::get_count()
 {
     return count;
+}
+
+void Reporter::wait_for_count_reached_value(int value)
+{
+    std::unique_lock<std::mutex> locker(cout_mutex);
+    
+    count_limit = value;
+    
+    if (count >= count_limit)
+        return;
+    else 
+        coun_reached_value.wait(locker, [this, value]() { return count >= value; });
+    
+    locker.unlock();
 }
 
 }; // namespace framework
