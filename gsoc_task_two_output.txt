@@ -1,0 +1,64 @@
+:$ ./src/framework 4 2 17
+Deposition      1955653498      -2012313585
+Propagation     1955653498      -2012313585
+Transfer        1955653498      -2012313585
+Digitizer       1955653498      -2012313585
+
+Deposition      26670051        230491096
+Propagation     26670051        230491096
+Transfer        26670051        230491096
+Digitizer       26670051        230491096
+
+Deposition      1235211833      -79595897
+Propagation     1235211833      -79595897
+Transfer        1235211833      -79595897
+Digitizer       1235211833      -79595897
+
+Deposition      -166232136      1936632180
+Propagation     -166232136      1936632180
+Transfer        -166232136      1936632180
+Digitizer       -166232136      1936632180
+
+
+:$ ./src/framework 4 4 17
+Deposition      1955653498      -2012313585
+Propagation     1955653498      -2012313585
+Transfer        1955653498      -2012313585
+Digitizer       1955653498      -2012313585
+
+Deposition      26670051        230491096
+Propagation     26670051        230491096
+Transfer        26670051        230491096
+Digitizer       26670051        230491096
+
+Deposition      1235211833      -79595897
+Propagation     1235211833      -79595897
+Transfer        1235211833      -79595897
+Digitizer       1235211833      -79595897
+
+Deposition      -166232136      1936632180
+Propagation     -166232136      1936632180
+Transfer        -166232136      1936632180
+Digitizer       -166232136      1936632180
+
+
+:$ ./src/framework 4 2 5344
+Deposition      1585727211      974739917
+Propagation     1585727211      974739917
+Transfer        1585727211      974739917
+Digitizer       1585727211      974739917
+
+Deposition      -1742874173     -1315414424
+Propagation     -1742874173     -1315414424
+Transfer        -1742874173     -1315414424
+Digitizer       -1742874173     -1315414424
+
+Deposition      -1496073385     1467215816
+Propagation     -1496073385     1467215816
+Transfer        -1496073385     1467215816
+Digitizer       -1496073385     1467215816
+
+Deposition      -269183549      2073504366
+Propagation     -269183549      2073504366
+Transfer        -269183549      2073504366
+Digitizer       -269183549      2073504366
