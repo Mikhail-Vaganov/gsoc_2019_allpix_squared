@@ -1,5 +1,5 @@
 ## Description
-The developed application, requested in the second evaluation task of the Allpix Squared project, serves as an example of usage of multithreading in C++ 11/14. The framework incorporates several tools for handling concurrent access to the data, emulating simulation of particles passing through a detector setup, multithreaded processing of separate events/tasks, ordered reporting on simulated events, etc.  Four dummy `Modules` are implemented for emulation of an event. The software uses several Mersenne Twister pseudo random number generators (PRNG).
+The developed application, requested in the second evaluation task of the Allpix Squared project, serves as an example of usage of multithreading in C++ 11/14. The framework incorporates several tools for handling concurrent access to the data, emulating simulation of particles passing through a detector setup, multithreaded processing of separate events/tasks, ordered reporting on simulated events, etc.  Four dummy modules are implemented for emulation of an event. The software uses several Mersenne Twister pseudo random number generators (PRNG).
 
 ## Source code
 The source code of the developed framework is available in _src_ folder of my GitHub repository devoted to the GSoC 2019 project:
