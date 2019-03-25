@@ -3,35 +3,45 @@
 #include <string>
 #include <fstream>
 #include <thread>
-#include "Module.hpp"
+#include <future>
 #include <random>
+#include <queue>
 
-using namespace std;
+#include "Module.hpp"
+#include "Deposition.hpp"
+#include "ConcurrentQueue.hpp"
+#include "Reporter.hpp"
+#include "Event.hpp"
+#include "ModuleSet.hpp"
+#include "InputParams.hpp"
+#include "ThreadPool.hpp"
 
+using namespace framework;
 
-int main()
+int main(int argc, char **args)
 {
-    mt19937 mt(1);
-    
-    for(int i=0; i<100; i++)
+    InputParams params(argc, args);
+
+    Reporter reporter;
+    reporter.start();
+
+    mt19937_64 mt(params.main_prng_seed);
+    ModuleSet ms;
+
+    ThreadPool tp(params.number_of_workers);
+
+    std::vector<std::thread> tt;
+
+    for(int i=0; i<params.number_of_iteration; i++)
     {
-        cout << "Random number: " << mt() << "\n";
+        Event e(ms, mt());
+        std::packaged_task<string()> task(e);
+        reporter.push(task.get_future());
+        tp.submit(move(task));
     }
 
-    vector<std::thread> workers;   // t starts running
-    
-    for(int i = 0; i<100; i++)
-    {
-        workers.push_back(std::thread([i]()
-        {
-            std::cout << i << "  ";
-        }));
-    }
-    
+    while (!reporter.queue_is_empty() )
+        std::this_thread::yield();
 
-    std::for_each(workers.begin(), workers.end(), [](std::thread &t){
-        t.join();
-    });
-    std::cout << "main thread\n";
     return 0;
 }
