@@ -1,6 +1,6 @@
-
 #include <string>
 #include <iostream>
+#include <stdexcept>
 
 #include "InputParams.hpp"
 
