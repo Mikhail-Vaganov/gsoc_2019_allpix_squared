@@ -29,6 +29,6 @@ namespace framework
             second_random_number = prng();
         }
 
-        return name + " " + std::to_string(first_random_number) + " " + std::to_string(second_random_number) + "\n";
+        return name + "\t" + std::to_string(first_random_number) + "\t" + std::to_string(second_random_number) + "\n";
     }
 }; // namespace framework
